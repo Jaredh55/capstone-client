@@ -1,0 +1,7 @@
+<h2><%= @post["title"] %></h2>
+<h4>Content: <%= @post["content"] %></h4>
+<h4>Latitude: <%= @post["latitude"] %></h4>
+<h4>Longitude: <%= @post["longitude"] %></h4>
+
+<a href="/client/posts/<%= @post['post_id'] %>/edit">Edit</a>
+<a href="/client/posts/<%= @post['post_id'] %>" data-method="delete">Delete</a>

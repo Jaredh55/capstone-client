@@ -1,0 +1,6 @@
+  <% @users.each do |user| %>
+        <h3> Username: <a href="/users/<%= user["user_id"] %>"><%= user["username"] %></a></h3>
+
+        <h4> Bio: <%= user["bio"] %></h4>
+
+  <% end %>
