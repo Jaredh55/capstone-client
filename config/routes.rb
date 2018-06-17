@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   namespace :client do
     post '/votes' => 'votes#create'
     delete '/votes/:id' => 'votes#destroy' #passing in post id instead, did not want to break restful routing convention
+    # get '/users/:id/edit' => 'users#edit'
+    patch '/votes/:id' => 'users#update'
+
   end
 
   namespace :client do

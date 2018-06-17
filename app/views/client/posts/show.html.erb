@@ -6,13 +6,25 @@
 <h4>City: <%= @post["city"]["name"] %></h4>
 <h4>Country: <%= @post["country"]["name"] %></h4>
 <h4>Votes: <%= @post["votecount"] %></h4>
+<h4>Score: <%= @post["score"] %></h4>
 
 <%= form_tag "/client/votes", method: :post do %>
   <input type="hidden" name="votable_id" value="<%= @post['post_id'] %>" />
+  <input type="hidden" name="positive" value="true">
   <input type="submit" name="" value="Upvote"/>
 <% end %>
 
-<a href="/client/votes/<%=@post["post_id"] %>" data-method="delete"> Remove Upvote_</a>
+<%= form_tag "/client/votes", method: :post do %>
+  <input type="hidden" name="votable_id" value="<%= @post['post_id'] %>" />
+  <input type="hidden" name="positive" value="false">
+  <input type="submit" name="" value="Downvote"/>
+<% end %>
+
+<a href="/client/votes/<%=@post["post_id"] %>" data-method="delete"> Remove vote_</a>
+
+
+
+
 
 <a href="/client/posts/<%= @post['post_id'] %>/edit">Edit</a>
 <a href="/client/posts/<%= @post['post_id'] %>" data-method="delete">Delete</a>

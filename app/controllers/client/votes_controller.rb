@@ -1,7 +1,8 @@
 class Client::VotesController < ApplicationController
   def create
     client_params = {
-                           votable_id: params[:votable_id]
+                           votable_id: params[:votable_id],
+                           positive: params[:positive]
                     }
 
     response = Unirest.post(
@@ -13,6 +14,33 @@ class Client::VotesController < ApplicationController
     # render '/views/client/posts/show.html.erb'
     redirect_to "/client/posts/#{post_id}"
 
+  end
+
+  def update
+    @vote = {
+                    'post_id' => params[:id],
+                     'title' => params[:title],
+                     'content' => params[:content],
+                     'latitude' => params[:latitude],
+                     'longitude' => params[:longitude],
+                     'visit' => params[:visit_id]
+                    }
+
+    response = Unirest.patch(
+                            "http://localhost:3000/api/posts/#{params[:id]}",
+                            parameters: @post
+                            )
+
+    if response.code == 200
+      flash[:success] = "Successfully updated Post"
+      redirect_to "/client/posts/#{params[:id]}"
+    elsif response.code == 401
+      flash[:warning] = "You are not authorized to update a post"
+      redirect_to '/'
+    else
+      @errors = response.body['errors']
+      render 'edit.html.erb'
+    end
   end
 
   def destroy
