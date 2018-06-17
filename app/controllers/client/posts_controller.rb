@@ -31,8 +31,8 @@ class Client::PostsController < ApplicationController
 
     if response.code == 200
       flash[:success] = "Successfully created Post"
-      redirect_to "/client/posts/"
-    elsif response.code == 401
+      redirect_to "/client/posts/new"
+    elsif response.code == 403
       flash[:warning] = "You are not authorized to make a post"
       redirect_to '/'
     elsif 

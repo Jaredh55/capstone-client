@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
       Unirest.clear_default_headers()
     end
   end
+
+  # def current_user
+  #   if session[:jwt]
+  #     @current_user = 
 end
