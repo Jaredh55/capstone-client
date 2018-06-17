@@ -11,7 +11,7 @@
 
 <%= form_tag "/users/#{@user["id"]}", method: :patch do %>
   <div>
-    Username: <input type="text" name="username" value="<%= @user["username"] %>" />
+    Email: <input type="text" name="email" value="<%= @user["email"] %>" />
   </div>
   <div>
     Bio: <input type="text" name="bio" value="<%= @user["bio"] %>" />

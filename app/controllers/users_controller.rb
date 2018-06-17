@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     client_params = {
-                      username: params[:username],
+                      email: params[:email],
                       bio: params[:bio],
                       password: params[:password],
                       password_confirmation: params[:password_confirmation]
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def update
     @user = {
                       'id' => params[:id],
-                     'username' => params[:username],
+                     'email' => params[:email],
                      'bio' => params[:bio]
                     }
 

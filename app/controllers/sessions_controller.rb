@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     client_params = {
                      auth: {
-                            username: params[:username],
+                            email: params[:email],
                             password: params[:password]
                            }
                      }     
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'Successfully logged in!'
       redirect_to '/'
     else
-      flash[:warning] = 'Invalid username or password!'
+      flash[:warning] = 'Invalid email or password!'
       redirect_to '/login'
     end
   end

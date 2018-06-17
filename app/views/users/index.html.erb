@@ -1,8 +1,17 @@
   <% @users.each do |user| %>
-        <h3> Username: <a href="/users/<%= user["user_id"] %>"><%= user["username"] %></a></h3>
+        <h3> Email: <a href="/users/<%= user["user_id"] %>"><%= user["email"] %></a></h3>
 
         <h4> Bio: <%= user["bio"] %></h4>
         <h4> Visits: <% user["visits"].each do |visit|  %></h4>
             <h5> <%= visit["city"]["name"] + ", " + visit["country"]["name"] %> </h5>
             <% end %>
+
+        <% @points = 0 %>
+        <% user["visits"].each do |visit| %>
+            <% visit["posts"].each do |post| %>
+             <% @points = @points + post["votecount"].to_i %>
+            <% end %>
+        <% end %>
+
+        <h4> Points: <%= @points %></h4>
   <% end %>

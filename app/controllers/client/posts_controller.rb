@@ -1,6 +1,11 @@
 class Client::PostsController < ApplicationController
   def index
-    response = Unirest.get("http://localhost:3000/api/posts")
+    client_params = {
+                     'search' => params[:search],
+                     'sort_by' => params[:sort_by],
+                     'sort_order' => params[:sort_order]
+                    }
+    response = Unirest.get("http://localhost:3000/api/posts", parameters: client_params)
     @posts = response.body
     render 'index.html.erb'
   end
@@ -15,7 +20,8 @@ class Client::PostsController < ApplicationController
                      'title' => params[:title],
                      'content' => params[:content],
                      'latitude' => params[:latitude],
-                     'longitude' => params[:longitude]
+                     'longitude' => params[:longitude],
+                     'city' => params[:city]
                     }
 
     response = Unirest.post(

@@ -1,7 +1,17 @@
-
+<ul>
+  <li>
+    Sort By
+    <ul>
+      <li><a href="/client/posts?sort_by=votes">Votes - Low to High</a></li>
+      <li><a href="/client/posts?sort_by=votes&&sort_order=desc">Votes - High to Low</a></li>
+      <li><a href="/client/posts?sort_by=created_at">Oldest </a></li>
+      <li><a href="/client/posts?sort_by=created_at&&sort_order=desc"> Newest </a></li>
+    </ul>
+  </li>
+</ul>
   <% @posts.each do |post| %>
-        <h2><a href="/client/posts/<%= post["post_id"] %>"><%= post["title"] %></a></h2>
-        <h4> User: <%= post["user"]["username"] %></h4>
+        <h2>Title: <a href="/client/posts/<%= post["post_id"] %>"><%= post["title"] %></a></h2>
+        <h4> User: <a href="/users/<%=post["user"]["id"]%>"> <%=post["user"]["email"] %></a></h4>
         <h4> Content: <%= post["content"] %></h4>
         <h4> Latitude: <%= post["latitude"] %></h4>
         <h4> Longitude: <%= post["longitude"] %></h4>
@@ -10,3 +20,5 @@
         <h4> Votes: <%= post["votecount"] %></h4>
 
   <% end %>
+
+  <a href="/client/posts/new"> New Post </a>
