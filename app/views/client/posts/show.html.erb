@@ -8,23 +8,69 @@
 <h4>Votes: <%= @post["votecount"] %></h4>
 <h4>Score: <%= @post["score"] %></h4>
 
+
+
 <%= form_tag "/client/votes", method: :post do %>
+  <input type="hidden" name="post_id" value="<%= @post['post_id'] %>" />
   <input type="hidden" name="votable_id" value="<%= @post['post_id'] %>" />
+  <input type="hidden" name="votable_type" value="Post">
   <input type="hidden" name="positive" value="true">
   <input type="submit" name="" value="Upvote"/>
 <% end %>
 
 <%= form_tag "/client/votes", method: :post do %>
+  <input type="hidden" name="post_id" value="<%= @post['post_id'] %>" />
   <input type="hidden" name="votable_id" value="<%= @post['post_id'] %>" />
+  <input type="hidden" name="votable_type" value="Post">
   <input type="hidden" name="positive" value="false">
   <input type="submit" name="" value="Downvote"/>
 <% end %>
 
-<a href="/client/votes/<%=@post["post_id"] %>" data-method="delete"> Remove vote_</a>
+<a href="/client/votes/<%=@post["post_id"]%>?votable_type=Post&&post_id=<%=@post["post_id"]%>" data-method="delete"> Remove vote</a>
 
 
+<h4>Comments: </h4>
+<ol>
+  <% @post["comments"].each do |comment| %>
+    <li>
+      <a href="/users/<%=comment["user_id"]%>"><%= comment["user"] %></a>: <%= comment["content"] %>
+      <br>
+        Votes: <%= comment["votecount"] %>
+        Score: <%= comment["score"] %>
+
+      <%= form_tag "/client/votes", method: :post do %>
+        <input type="hidden" name="post_id" value="<%= @post['post_id'] %>" />
+
+        <input type="hidden" name="votable_id" value="<%= comment['id'] %>" />
+        <input type="hidden" name="votable_type" value="Comment">
+        <input type="hidden" name="positive" value="true">
+        <input type="submit" name="" value="Upvote"/>
+      <% end %>
+
+      <%= form_tag "/client/votes", method: :post do %>
+        <input type="hidden" name="post_id" value="<%= @post['post_id'] %>" />
+        <input type="hidden" name="votable_id" value="<%= comment['id'] %>" />
+        <input type="hidden" name="votable_type" value="Comment">
+        <input type="hidden" name="positive" value="false">
+        <input type="submit" name="" value="Downvote"/>
+      <% end %>
+
+      <a href="/client/votes/<%=comment['id']%>?votable_type=Comment&&post_id=<%=@post["post_id"]%>" data-method="delete"> Remove vote </a>
 
 
+    </li>
+    <br>
+  <% end %>
+</ol>
+
+<h4>Add Comment:</h4>
+    <%= form_tag "/client/comments", method: :post do %>
+      <input type="hidden" name="post_id" value="<%= @post['post_id'] %>" />
+      <input type="text" name="content">
+      <input type="submit" name="" value="Add Comment"/>
+    <% end %>
+
+<br>
 
 <a href="/client/posts/<%= @post['post_id'] %>/edit">Edit</a>
 <a href="/client/posts/<%= @post['post_id'] %>" data-method="delete">Delete</a>

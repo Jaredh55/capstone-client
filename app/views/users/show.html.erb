@@ -14,17 +14,20 @@
     <% end %>
 <% end %>
 
+<% @user["comments"].each do |comment| %>
+     <% @points = @points + comment["score"].to_i %>
+<% end %>
+
+
 <h4> Points: <%= @points %></h4>
 
 <%= form_tag "/client/visits", method: :post do %>
-  
   <div>
     City: <input type="text" name="city" />
   </div>
     <div>
     Country: <input type="text" name="country" />
   </div>
-
   <input type="submit" name="" value="Add Visit"/>
 <% end %>
 

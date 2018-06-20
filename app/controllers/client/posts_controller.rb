@@ -42,6 +42,7 @@ class Client::PostsController < ApplicationController
   end
 
   def show
+    @new_comment = {}
     post_id = params[:id]
     response = Unirest.get("http://localhost:3000/api/posts/#{post_id}")
     @post = response.body
