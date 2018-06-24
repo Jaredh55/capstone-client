@@ -1,6 +1,6 @@
 <% if @errors  %>
   <ul>
-    <% @errors.each do |error| %>
+    <%= @errors.each do |error| %>
     <li>
       <%= error %>
     </li>
@@ -9,7 +9,7 @@
 <% end %>
 
 
-<%= form_tag "/client/posts/#{@post["id"]}", method: :patch do %>
+<%= form_tag "/client/posts/#{@post['post_id']}", method: :patch do %>
   <div>
     Title: <input type="text" name="title" value="<%= @post["title"] %>" />
   </div>
@@ -20,7 +20,16 @@
     Latitude: <input type="text" name="latitude" value="<%= @post["latitude"] %>" />
   </div>
   <div>
-    Longitude: <input type="longitude" name="longitude" value="<%= @post["longitude"] %>">
+    Longitude: <input type="text" name="longitude" value="<%= @post["longitude"] %>">
+  </div>
+  <div>
+    City: <input type="text" name="city" value="<%= @post["city"]["name"] %>">
+  </div>
+  <div>
+    Country: <input type="text" name="country" value="<%= @post["country"]["name"] %>">
+  </div>
+  <div>
+    Tags: <input type="text" name="tags" value="<%= @post["show_tags"] %>"> (separate by commas and spaces)
   </div>
   <input type="submit" name="" value="Update Post"/>
 <% end %>

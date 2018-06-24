@@ -17,12 +17,10 @@ class Client::VisitsController < ApplicationController
   end
 
   def destroy #still working on this show.html.erb not working
-    user_id = params[:id]
+    user_id = params[:user_id]
+    visit_id = params[:id]
 
-    client_params = {
-                      city_id: params[:city_id]
-                      }
-    response = Unirest.delete("http://localhost:3000/api/votes/#{user_id}", parameters: client_params)
-    redirect_to '/users'
+    response = Unirest.delete("http://localhost:3000/api/visits/#{visit_id}")
+    redirect_to "/users/#{user_id}"
   end
 end

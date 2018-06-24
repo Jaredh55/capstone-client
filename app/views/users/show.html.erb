@@ -1,11 +1,23 @@
 <h2><%= @user["email"] %></h2>
 <h4>Bio: <%= @user["bio"] %></h4>
-<h4>ID: <%= @user["id"] %></h4>
+<h4>ID: <%= @user["user_id"] %></h4>
 
-<h4> Visits: <% @user["visits"].each do |visit|  %></h4>
-    <h5> <%= visit["city"]["name"] + ", " + visit["country"]["name"] %> </h5>
+<h4> Visits: </h4>
+  <ul>
+    <% @user["visits"].each do |visit|  %>
+      <li>
+        <%= visit["city"]["name"] + ", " + visit["country"]["name"] %>
+      </li>
+    <% end %>
+  </ul>
+
+<h4> Posts: </h4>
+  <ul>
+    <% @user["posts"].each do |post| %>
+      <li><a href="/client/posts/<%=post["id"]%>"><%= post["title"] %></a></li>
+    <% end %>
+  </ul>
     
-<% end %>
 
 <% @points = 0 %>
 <% @user["visits"].each do |visit| %>
@@ -20,16 +32,6 @@
 
 
 <h4> Points: <%= @points %></h4>
-
-<%= form_tag "/client/visits", method: :post do %>
-  <div>
-    City: <input type="text" name="city" />
-  </div>
-    <div>
-    Country: <input type="text" name="country" />
-  </div>
-  <input type="submit" name="" value="Add Visit"/>
-<% end %>
 
 <a href="/users/<%= @user['user_id'] %>/edit">Edit</a>
 <a href="/users/<%= @user['user_id'] %>" data-method="delete">Delete</a>

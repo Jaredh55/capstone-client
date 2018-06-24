@@ -21,7 +21,8 @@ class Client::PostsController < ApplicationController
                      'content' => params[:content],
                      'latitude' => params[:latitude],
                      'longitude' => params[:longitude],
-                     'city' => params[:city]
+                     'city' => params[:city],
+                     'tags' => params[:tags]
                     }
 
     response = Unirest.post(
@@ -62,7 +63,8 @@ class Client::PostsController < ApplicationController
                      'content' => params[:content],
                      'latitude' => params[:latitude],
                      'longitude' => params[:longitude],
-                     'visit' => params[:visit_id]
+                     'visit' => params[:visit_id],
+                     'tags' => params[:tags]
                     }
 
     response = Unirest.patch(

@@ -9,7 +9,7 @@
 <% end %>
 
 
-<%= form_tag "/users/#{@user["id"]}", method: :patch do %>
+<%= form_tag "/users/#{@user['id']}", method: :patch do %>
   <div>
     Email: <input type="text" name="email" value="<%= @user["email"] %>" />
   </div>
@@ -19,3 +19,24 @@
 
   <input type="submit" name="" value="Update Profile"/>
 <% end %>
+
+<h4> Visits: </h4>
+  <ul>
+    <% @user["visits"].each do |visit|  %>
+      <li>
+        <%= visit["city"]["name"] + ", " + visit["country"]["name"] %>
+        <a href="/client/visits/<%=visit['id']%>?user_id=<%=@user['id']%>" data-method="delete">Remove Visit</a>
+      </li>
+    <% end %>
+  </ul>
+
+<h4> Add Visit: </h4>
+  <%= form_tag "/client/visits", method: :post do %>
+    <div>
+      City: <input type="text" name="city" />
+    </div>
+      <div>
+      Country: <input type="text" name="country" />
+    </div>
+    <input type="submit" name="" value="Add Visit"/>
+  <% end %>
